@@ -10,17 +10,24 @@
 #define BACK 2
 
 
-char mainCodeName[100];
+char mainCodeNameJudge[100];
 int compileJudge(){
     while (1){
-        printf("Please enter main code name: ");
-        gets(mainCodeName);
-        if (strcmp("back",mainCodeName) == 0){
+
+        printf("Please enter main code name(Press \'d\' for the default path): ");
+        gets(mainCodeNameJudge);
+        if (strcmp("back",mainCodeNameJudge) == 0){
             system("cls");
             return BACK;
         }
+        //====================================
+        if (strcmp("d",mainCodeNameJudge) == 0){
+            strcpy(mainCodeNameJudge,"judge\\C file\\*.c");
+            system("cls");
+        }
+        //====================================
         char arr[100];
-        sprintf(arr,"gcc \"%s\" -o judge/testCode",mainCodeName);
+        sprintf(arr,"gcc \"%s\" -o judge/testCode",mainCodeNameJudge);
         int result;
         result = system(arr);
         if (result == 0){
@@ -28,6 +35,7 @@ int compileJudge(){
             system("cls");
             return CODE_EXECUTED_SUCCESSFULLY;
         }
+
         else
         {
             printf("Your code had an error. Please try again\n");getchar();

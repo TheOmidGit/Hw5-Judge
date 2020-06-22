@@ -11,12 +11,19 @@
 char mainCodeName[100];
 int compile(){
     while (1){
-        printf("Please enter main code path: ");
+        printf("Please enter main code path(Press \'d\' for the default path): ");
         gets(mainCodeName);
+
         if (strcmp("back",mainCodeName) == 0){
             system("cls");
             return BACK;
         }
+        //=====================================
+        if (strcmp("d",mainCodeName) == 0){
+            strcpy(mainCodeName,"generator\\C file\\*.c");
+            system("cls");
+        }
+        //=====================================
         char arr[100];
         sprintf(arr,"gcc \"%s\" -o generator/generate",mainCodeName);
         int result;
@@ -37,18 +44,6 @@ int compile(){
 
 
 
-
-
-
-
-/*struct files
-{
-    char inputsPath[500],inputsNames[101][101];
-};
-
-struct files inputsAndFiles;*/
-
-
 void removeBackSlashN(int index){
     int j;
     for (j=0;inputsAndFiles.inputsNames[index][0]!='\0';j++){
@@ -63,14 +58,21 @@ void removeBackSlashN(int index){
 int getTestsPath(){
     
     while (1){
-        printf("Enter the path of inputs: ");
+        printf("Enter the path of inputs(Press \'d\' for the default path): ");
         gets(inputsAndFiles.inputsPath);
 
         //back
         if (strcmp("back",inputsAndFiles.inputsPath) == 0){
-                system("cls");
-                return BACK;
+            system("cls");
+            return BACK;
         }
+        //=====================================
+        if (strcmp("d",inputsAndFiles.inputsPath) == 0){
+            strcpy(inputsAndFiles.inputsPath,"generator\\inputs");
+            system("cls");
+        }
+        //=====================================
+
 
         char filesListCommand[1000];
         sprintf(filesListCommand,"dir /b \"%s\"",inputsAndFiles.inputsPath);
@@ -114,19 +116,19 @@ int getTestsPath(){
             system("cls");
             continue;
         }
-        
+        //=====================================
         else{
-            char temp[50];
-            printf("You did not enter a correct character !");gets(temp);getchar();
+            printf("You did not enter a correct character !");
             fflush(stdin);
+            getchar();
             system("cls");
             continue;
         }
+        //=====================================
     }
     
 }
 
-//D:\Programs\Hw5-Judge-master\Test Cases\in
 
 int generate(){
     int i =0;
