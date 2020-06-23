@@ -6,6 +6,7 @@
 
 #define BACK 2
 
+int resultForGenerateTestCase;
 
 
 
@@ -18,15 +19,17 @@
 int generateTestCase(){
     int result;
     //======================
-    result = compile();
-    if (result == BACK){
-        return BACK;
-    }
-    //======================
     result = getTestsPath();
     if (result == BACK){
         return BACK;
     }
+    //======================
+    result = compile();
+    if (result == BACK){
+        return BACK;
+    }
+    
+    
     //======================
     generate();
     return 1;
@@ -34,6 +37,12 @@ int generateTestCase(){
 }
 
 int judge(){
+    if (resultForGenerateTestCase != 1)
+    {
+        printf("You have to generate codes first!");getchar();
+        return 0;
+    }
+    
     int result;
     //======================
     result = compileJudge();
@@ -54,7 +63,7 @@ int judge(){
 int main() {
     while (1)
     {   
-        int result;
+        
         system("cls");
         //menu
         printf("1 -> Generate test case\n2 -> Judge\n3 -> Exit\n");
@@ -65,7 +74,7 @@ int main() {
         {
         case 1:
             system("cls");
-            generateTestCase();
+            resultForGenerateTestCase = generateTestCase();
             break;
         case 2:
             system("cls");
